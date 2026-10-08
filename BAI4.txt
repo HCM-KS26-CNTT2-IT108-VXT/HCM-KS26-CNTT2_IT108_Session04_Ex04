@@ -1,0 +1,39 @@
+Bài 4 : Quản lý đường dẫn trong hệ thống tệp
+Phần 1: Phân tích & Đề xuất
+Tiêu chí	Cách 1: Absolute Path	Cách 2: Relative Path
+Tính di động	Thấp. Đường dẫn phụ thuộc vào tên User, ổ đĩa và vị trí thư mục trên máy của An. Khi gửi sang máy khác có thể không chạy được.	Cao. Đường dẫn dựa vào vị trí của thư mục Project nên có thể sử dụng khi chuyển cả Project sang máy khác.
+Độ dài câu lệnh	Dài vì phải ghi đầy đủ đường dẫn từ ổ đĩa.	Ngắn hơn, chỉ cần ghi đường dẫn dựa trên vị trí hiện tại của code.
+Tính an toàn	Không tốt bằng vì có thể làm lộ tên User và vị trí thư mục trên máy. Ngoài ra, khi thay đổi vị trí Project thì phải sửa lại đường dẫn.	Tốt hơn trong trường hợp này vì không chứa tên User hay ổ đĩa cụ thể. Dễ quản lý khi chia sẻ Project.
+Nhận xét
+
+Cách 1 có ưu điểm là đường dẫn rõ ràng, biết chính xác file nằm ở đâu. Tuy nhiên, nó phụ thuộc vào máy của An. Ví dụ nếu máy khác không có C:\Users\An\Desktop\... thì chương trình sẽ không tìm thấy file.
+
+Cách 2 linh hoạt hơn vì đường dẫn được tính dựa trên vị trí của thư mục chứa code. Khi gửi cả thư mục Project cho bạn bè, cấu trúc bên trong vẫn giữ nguyên nên đường dẫn vẫn có thể sử dụng được.
+
+Phần 2: Lựa chọn
+
+Em chọn Cách 2 – Relative Path:
+
+../Data/users.csv
+
+Lý do là yêu cầu của bài là phải có khả năng chạy khi gửi toàn bộ thư mục Project cho người khác. Relative Path không phụ thuộc vào tên User hay ổ đĩa cụ thể nên phù hợp hơn.
+
+Giả sử cấu trúc thư mục là:
+
+	Project/src/code.py/Data/ users.csv
+
+Code đang nằm trong thư mục src.
+
+. là thư mục hiện tại, tức src.
+.. là thư mục cha, tức Project.
+../Data/users.csv nghĩa là từ src đi lên Project, sau đó đi vào Data và tìm file users.csv.
+
+Vì vậy, đường dẫn:
+
+../Data/users.csv
+
+sẽ trỏ đến:
+
+Project/Data/users.csv
+
+và không cần quan tâm máy đang dùng ổ C:, D: hay tên User nào.
